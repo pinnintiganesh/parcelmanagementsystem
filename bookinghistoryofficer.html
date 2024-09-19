@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Booking History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header span {
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .header button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .header button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            text-align: center;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .filter-section input {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .filter-section button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .filter-section button:hover {
+            background-color: #45a049;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+        }
+        .pagination button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .pagination button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>Welcome, Officer <span id="username"></span></span>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <h1>Officer Booking History</h1>
+
+    <div class="filter-section">
+        <input type="text" id="customerID" placeholder="Enter Customer ID">
+        <input type="date" id="startDate" placeholder="Start Date">
+        <input type="date" id="endDate" placeholder="End Date">
+        <button onclick="filterBookings()">Search</button>
+    </div>
+
+    <table id="bookingTable">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Booking ID</th>
+                <th>Booking Date</th>
+                <th>Receiver Name</th>
+                <th>Delivered Address</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="bookingBody">
+            <!-- Booking details will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <button onclick="previousPage()">Previous</button>
+        <button onclick="nextPage()">Next</button>
+    </div>
+
+    <div class="message" id="message"></div>
+
+    <script>
+        const username = "Officer001"; // This could come from a session or database
+        document.getElementById('username').textContent = username;
+
+        const bookings = [
+            { customerID: 'C001', bookingID: 'B1001', bookingDate: '2024-07-01', receiverName: 'Alice', deliveredAddress: '1234 Elm St', amount: '$100', status: 'Delivered' },
+            { customerID: 'C002', bookingID: 'B1002', bookingDate: '2024-07-05', receiverName: 'Bob', deliveredAddress: '5678 Oak St', amount: '$200', status: 'In Transit' },
+            { customerID: 'C001', bookingID: 'B1003', bookingDate: '2024-07-10', receiverName: 'Charlie', deliveredAddress: '9101 Pine St', amount: '$150', status: 'Picked Up' },
+            // More booking records can be added
+        ];
+
+        let filteredBookings = [];
+        let currentPage = 0;
+        const itemsPerPage = 2;
+
+        function displayBookings(page) {
+            const bookingBody = document.getElementById('bookingBody');
+            bookingBody.innerHTML = ''; // Clear the table
+
+            const start = page * itemsPerPage;
+            const end = start + itemsPerPage;
+            const currentBookings = filteredBookings.slice(start, end);
+
+            if (currentBookings.length === 0) {
+                document.getElementById('message').textContent = 'No bookings available for this selection.';
+                return;
+            } else {
+                document.getElementById('message').textContent = '';
+            }
+
+            currentBookings.forEach(booking => {
+                const row = `<tr>
+                    <td>${booking.customerID}</td>
+                    <td>${booking.bookingID}</td>
+                    <td>${booking.bookingDate}</td>
+                    <td>${booking.receiverName}</td>
+                    <td>${booking.deliveredAddress}</td>
+                    <td>${booking.amount}</td>
+                    <td>${booking.status}</td>
+                </tr>`;
+                bookingBody.innerHTML += row;
+            });
+        }
+
+        function filterBookings() {
+            const customerID = document.getElementById('customerID').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            // Filter based on Customer ID and Date Range
+            filteredBookings = bookings.filter(booking => {
+                const bookingDate = new Date(booking.bookingDate);
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                return (!customerID || booking.customerID === customerID) &&
+                    (!startDate || bookingDate >= start) &&
+                    (!endDate || bookingDate <= end);
+            });
+
+            if (filteredBookings.length === 0) {
+                document.getElementById('message').textContent = 'No bookings found for the given criteria.';
+            } else {
+                document.getElementById('message').textContent = '';
+                currentPage = 0; // Reset to the first page
+                displayBookings(currentPage);
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                displayBookings(currentPage);
+            } else {
+                document.getElementById('message').textContent = 'This is the first page.';
+            }
+        }
+
+        function nextPage() {
+            if ((currentPage + 1) * itemsPerPage < filteredBookings.length) {
+                currentPage++;
+                displayBookings(currentPage);
+            } else {
+                document.getElementById('message').textContent = 'This is the last page.';
+            }
+        }
+
+        function logout() {
+            alert('You have been logged out!');
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+
+        // Initial display (empty until filtered)
+        filteredBookings = bookings; // Default, show all bookings on page load
+        displayBookings(currentPage);
+    </script>
+</body>
+</html>

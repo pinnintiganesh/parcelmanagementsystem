@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Service - Parcel Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group input[readonly], .form-group textarea[readonly] {
+            background-color: #e9ecef;
+        }
+        .form-group small {
+            color: red;
+        }
+        .form-actions {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .form-actions button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-group label, .form-actions {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Parcel Booking Service</h1>
+
+    <!-- Sender Information -->
+    <div class="form-group">
+        <label for="senderName">Sender Name:</label>
+        <input type="text" id="senderName" value="John Doe" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="senderAddress">Sender Address:</label>
+        <textarea id="senderAddress" rows="3" readonly>123 Main Street, City, ZIP 12345</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="senderContact">Sender Contact Details:</label>
+        <input type="text" id="senderContact" value="+1 234 567 890" readonly>
+    </div>
+
+    <!-- Receiver Information -->
+    <div class="form-group">
+        <label for="receiverName">Receiver Name:</label>
+        <input type="text" id="receiverName" placeholder="Enter receiver's name" required>
+        <small id="receiverNameError"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="receiverAddress">Receiver Address:</label>
+        <textarea id="receiverAddress" rows="3" placeholder="Enter receiver's address" required></textarea>
+        <small id="receiverAddressError"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="receiverPinCode">Receiver Pin Code:</label>
+        <input type="text" id="receiverPinCode" placeholder="Enter pin code" required>
+        <small id="receiverPinCodeError"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="receiverContact">Receiver Contact Details:</label>
+        <input type="text" id="receiverContact" placeholder="Enter receiver's contact details" required>
+        <small id="receiverContactError"></small>
+    </div>
+
+    <!-- Parcel Details -->
+    <div class="form-group">
+        <label for="parcelSize">Parcel Size and Weight:</label>
+        <select id="parcelSize" required>
+            <option value="">Select Size and Weight</option>
+            <option value="Small (up to 1kg)">Small (up to 1kg)</option>
+            <option value="Medium (1kg to 5kg)">Medium (1kg to 5kg)</option>
+            <option value="Large (5kg to 20kg)">Large (5kg to 20kg)</option>
+        </select>
+        <small id="parcelSizeError"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="parcelContents">Contents Description:</label>
+        <textarea id="parcelContents" rows="3" placeholder="Describe the contents for tracking and safety" required></textarea>
+        <small id="parcelContentsError"></small>
+    </div>
+
+    <!-- Shipping Options -->
+    <div class="form-group">
+        <label for="shippingSpeed">Choose Delivery Speed:</label>
+        <select id="shippingSpeed" required>
+            <option value="">Select Speed</option>
+            <option value="Standard">Standard</option>
+            <option value="Express">Express</option>
+        </select>
+        <small id="shippingSpeedError"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="packaging">Select Packaging Preferences:</label>
+        <select id="packaging" required>
+            <option value="">Select Packaging</option>
+            <option value="Standard Packaging">Standard Packaging</option>
+            <option value="Custom Packaging">Custom Packaging</option>
+            <option value="Eco-friendly Packaging">Eco-friendly Packaging</option>
+            <option value="Fragile Item Handling">Fragile Item Handling</option>
+        </select>
+        <small id="packagingError"></small>
+    </div>
+
+    <!-- Date and Time Selection -->
+    <div class="form-group">
+        <label for="pickupDate">Preferred Pickup or Drop-off Date and Time:</label>
+        <input type="datetime-local" id="pickupDate" required>
+        <small id="pickupDateError"></small>
+    </div>
+
+    <!-- Service Cost and Payment -->
+    <div class="form-group">
+        <label for="serviceCost">Service Cost (Calculated based on options):</label>
+        <input type="text" id="serviceCost" value="$25.00" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="paymentMethod">Choose Payment Method:</label>
+        <select id="paymentMethod" required>
+            <option value="">Select Payment Method</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="PayPal">PayPal</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+        </select>
+        <small id="paymentMethodError"></small>
+    </div>
+
+    <!-- Additional Services -->
+    <div class="form-group">
+        <label for="insurance">Insurance Options:</label>
+        <select id="insurance" required>
+            <option value="">Select Insurance Option</option>
+            <option value="No Insurance">No Insurance</option>
+            <option value="Basic Insurance">Basic Insurance</option>
+            <option value="Full Insurance">Full Insurance</option>
+        </select>
+        <small id="insuranceError"></small>
+    </div>
+
+    <div class="form-group">
+        <label for="tracking">Tracking Service:</label>
+        <select id="tracking" required>
+            <option value="">Select Tracking Service</option>
+            <option value="Basic Tracking">Basic Tracking</option>
+            <option value="Advanced Tracking">Advanced Tracking</option>
+        </select>
+        <small id="trackingError"></small>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+        <button type="submit" onclick="validateForm()">Submit Booking</button>
+    </div>
+</div>
+
+<script>
+    // Form validation function
+    function validateForm() {
+        let valid = true;
+
+        const receiverName = document.getElementById('receiverName').value;
+        const receiverAddress = document.getElementById('receiverAddress').value;
+        const receiverPinCode = document.getElementById('receiverPinCode').value;
+        const receiverContact = document.getElementById('receiverContact').value;
+        const parcelSize = document.getElementById('parcelSize').value;
+        const parcelContents = document.getElementById('parcelContents').value;
+        const shippingSpeed = document.getElementById('shippingSpeed').value;
+        const packaging = document.getElementById('packaging').value;
+        const pickupDate = document.getElementById('pickupDate').value;
+        const paymentMethod = document.getElementById('paymentMethod').value;
+        const insurance = document.getElementById('insurance').value;
+        const tracking = document.getElementById('tracking').value;
+
+        if (!receiverName) {
+            valid = false;
+            document.getElementById('receiverNameError').textContent = 'Receiver name is required.';
+        }
+
+        if (!receiverAddress) {
+            valid = false;
+            document.getElementById('receiverAddressError').textContent = 'Receiver address is required.';
+        }
+
+        if (!receiverPinCode || isNaN(receiverPinCode)) {
+            valid = false;
+            document.getElementById('receiverPinCodeError').textContent = 'Valid pin code is required.';
+        }
+
+        if (!receiverContact || isNaN(receiverContact)) {
+            valid = false;
+            document.getElementById('receiverContactError').textContent = 'Valid contact details are required.';
+        }
+
+        if (!parcelSize) {
+            valid = false;
+            document.getElementById('parcelSizeError').textContent = 'Parcel size and weight are required.';
+        }
+
+        if (!parcelContents) {
+            valid = false;
+            document.getElementById('parcelContentsError').textContent = 'Parcel contents description is required.';
+        }
+
+        if (!shippingSpeed) {
+            valid = false;
+            document.getElementById('shippingSpeedError').textContent = 'Delivery speed is required.';
+        }
+
+        if (!packaging) {
+            valid = false;
+            document.getElementById('packagingError').textContent = 'Packaging preference is required.';
+        }
+
+        if (!pickupDate) {
+            valid = false;
+            document.getElementById('pickupDateError').textContent = 'Pickup or drop-off date is required.';
+        }
+
+        if (!paymentMethod) {
+            valid = false;
+            document.getElementById('paymentMethodError').textContent = 'Payment method is required.';
+        }
+
+        if (!insurance) {
+            valid = false;
+            document.getElementById('insuranceError').textContent = 'Insurance option is required.';
+        }
+
+        if (!tracking) {
+            valid = false;
+            document.getElementById('trackingError').textContent = 'Tracking service is required.';
+        }
+
+        if (valid) {
+            alert('Booking Successful!');
+        }
+    }
+</script>
+
+</body>
+</html>

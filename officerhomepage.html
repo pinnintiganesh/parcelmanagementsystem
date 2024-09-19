@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Home Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            height: 100%;
+        }
+        nav {
+            background-color: #007bff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .menu {
+            display: flex;
+            list-style-type: none;
+        }
+        nav .menu li {
+            margin-right: 20px;
+        }
+        nav .menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav .menu li a:hover {
+            text-decoration: underline;
+        }
+        .welcome {
+            color: white;
+            font-size: 16px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav .menu li {
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav>
+        <div class="welcome" id="welcomeMessage">Welcome, Officer</div>
+        <ul class="menu">
+            <li><a href="#" onclick="goToHome()">Home</a></li>
+            <li><a href="#" onclick="goToTracking()">Tracking</a></li>
+            <li><a href="#" onclick="goToDeliveryStatus()">Delivery Status</a></li>
+            <li><a href="#" onclick="goToPickupScheduling()">Pickup Scheduling</a></li>
+            <li><a href="#" onclick="goToPreviousBooking()">Previous Booking</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Welcome to the Officer Home Page</h1>
+        <p>Use the navigation bar to explore options relevant to your officer role.</p>
+    </div>
+
+    <script>
+        // Simulate getting the logged-in username from the backend
+        const loggedInOfficer = localStorage.getItem('username') || 'Officer';
+
+        // Display welcome message with username
+        document.getElementById('welcomeMessage').textContent = `Welcome, ${loggedInOfficer}`;
+
+        // Navigation functions (These would redirect to actual pages in a real app)
+        function goToHome() {
+            alert('Redirecting to Home Page');
+        }
+
+        function goToTracking() {
+            alert('Redirecting to Tracking Page');
+        }
+
+        function goToDeliveryStatus() {
+            alert('Redirecting to Delivery Status Page');
+        }
+
+        function goToPickupScheduling() {
+            alert('Redirecting to Pickup Scheduling Page');
+        }
+
+        function goToPreviousBooking() {
+            alert('Redirecting to Previous Booking Page');
+        }
+
+        function logout() {
+            // Clear user details and redirect to login page
+            localStorage.removeItem('username');
+            alert('Logging out... Redirecting to Login Page');
+            window.location.href = "login.html";  // Replace with actual login page
+        }
+    </script>
+</body>
+</html>

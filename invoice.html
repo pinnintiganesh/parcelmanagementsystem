@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .invoice-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .invoice-details {
+            margin-bottom: 20px;
+        }
+        .invoice-details p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        .invoice-details strong {
+            color: #555;
+        }
+        .print-button {
+            text-align: center;
+        }
+        .print-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .print-button button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .invoice-container {
+                padding: 15px;
+            }
+            .invoice-header h1 {
+                font-size: 24px;
+            }
+            .invoice-details p {
+                font-size: 14px;
+            }
+            .print-button button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-container">
+        <div class="invoice-header">
+            <h1>Invoice</h1>
+        </div>
+        <div class="invoice-details">
+            <p><strong>Receiver Name:</strong> John Doe</p>
+            <p><strong>Receiver Address:</strong> 123 Elm Street, Springfield</p>
+            <p><strong>Receiver Pin Code:</strong> 123456</p>
+            <p><strong>Receiver Mobile Number:</strong> +1-234-567-8901</p>
+            <p><strong>Parcel Weight (g):</strong> 1500</p>
+            <p><strong>Parcel Contents Description:</strong> Electronics</p>
+            <p><strong>Parcel Delivery Type:</strong> Express</p>
+            <p><strong>Parcel Packing Preference:</strong> Box</p>
+            <p><strong>Parcel Pickup Time:</strong> 2024-09-15 14:00</p>
+            <p><strong>Parcel Dropoff Time:</strong> 2024-09-16 10:00</p>
+            <p><strong>Parcel Service Cost:</strong> $25.00</p>
+            <p><strong>Parcel Payment Time:</strong> 2024-09-15 14:10</p>
+        </div>
+        <div class="print-button">
+            <button onclick="window.print()">Print Invoice</button>
+        </div>
+    </div>
+</body>
+</html>

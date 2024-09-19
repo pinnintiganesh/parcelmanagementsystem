@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .header span {
+            margin-right: 20px;
+            font-weight: bold;
+        }
+        .header button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .header button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            text-align: center;
+        }
+        .contact-info {
+            margin: 0 auto;
+            width: 50%;
+            text-align: left;
+        }
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>Welcome, <span id="username"></span></span>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <h1>Customer Support</h1>
+    
+    <div class="contact-info">
+        <p><strong>Contact Number:</strong> +1-800-123-456</p>
+        <p><strong>Email ID:</strong> support@company.com</p>
+        <p><strong>Address:</strong> 1234 Support Lane, Help City, 56789</p>
+    </div>
+
+    <script>
+        // Simulating username retrieval and setting it dynamically
+        const username = "JohnDoe"; // This could come from a session or database
+        document.getElementById('username').textContent = username;
+
+        function logout() {
+            // Simulating a logout operation
+            alert('You have been logged out!');
+            // Here, you can redirect to the login page or any other action
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

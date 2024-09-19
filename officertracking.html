@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Officer Tracking Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .login-form, .dashboard {
+            margin-bottom: 20px;
+        }
+        .login-form label, .dashboard label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .login-form input, .dashboard input, .dashboard button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .login-form button, .dashboard button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-form button:hover, .dashboard button:hover {
+            background-color: #0056b3;
+        }
+        .package-list {
+            margin-bottom: 20px;
+        }
+        .package-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .package-list th, .package-list td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        .package-list th {
+            background-color: #f4f4f4;
+        }
+        .status-display {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .status-display p {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .login-form input, .dashboard input, .dashboard button {
+                font-size: 14px;
+            }
+            .package-list th, .package-list td {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div class="login-form">
+            <h1>Officer Login</h1>
+            <label for="userId">User ID:</label>
+            <input type="text" id="userId" placeholder="Enter User ID">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="login()">Login</button>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard" id="dashboard" style="display: none;">
+            <h1>Package Tracking Dashboard</h1>
+            <div class="search-form">
+                <label for="customerId">Customer ID:</label>
+                <input type="text" id="customerId" placeholder="Enter Customer ID">
+                <label for="bookingId">Booking ID:</label>
+                <input type="text" id="bookingId" placeholder="Enter Booking ID">
+                <button onclick="searchPackage()">Search</button>
+            </div>
+            <div class="package-list">
+                <h2>Shipped Packages</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Customer ID</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="packageList">
+                        <!-- Example rows, in practice these would be dynamically generated -->
+                        <tr>
+                            <td>123456789012</td>
+                            <td>Cust001</td>
+                            <td>In Transit</td>
+                        </tr>
+                        <tr>
+                            <td>234567890123</td>
+                            <td>Cust002</td>
+                            <td>Delivered</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="status-display" id="statusDisplay">
+                <p id="statusMessage">Please enter a Customer ID and Booking ID to view the status.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            var userId = document.getElementById('userId').value;
+            var password = document.getElementById('password').value;
+
+            // Simulate login verification
+            if (userId && password) {
+                document.querySelector('.login-form').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+            } else {
+                alert('Please enter both User ID and Password.');
+            }
+        }
+
+        function searchPackage() {
+            var customerId = document.getElementById('customerId').value;
+            var bookingId = document.getElementById('bookingId').value;
+            var statusDisplay = document.getElementById('statusDisplay');
+            var statusMessage = document.getElementById('statusMessage');
+
+            // Simulate a status check
+            if (customerId && bookingId) {
+                // Normally, you would send a request to the server here.
+                statusMessage.textContent = 'The status of the package with Booking ID ' + bookingId + ' and Customer ID ' + customerId + ' is: In Transit.';
+                statusDisplay.style.display = 'block';
+            } else {
+                statusMessage.textContent = 'Please enter both Customer ID and Booking ID.';
+                statusDisplay.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

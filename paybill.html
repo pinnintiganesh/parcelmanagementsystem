@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Bill - Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group input[readonly] {
+            background-color: #e9ecef;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .button-container button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .success-message {
+            color: green;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Payment Page</h2>
+    <div id="welcome" class="form-group">
+        <label>Welcome, <span id="username">Customer123</span></label>
+        <button onclick="logout()">Logout</button>
+    </div>
+    
+    <div class="form-group">
+        <label>Bill Amount</label>
+        <input type="text" id="billAmount" value="₹1200" readonly>
+    </div>
+
+    <div class="form-group">
+        <label>Mode of Payment</label>
+        <button onclick="proceedToPayment()">Pay Now</button>
+        <button onclick="backToHome()">Back to Home</button>
+    </div>
+
+    <div class="form-group" id="paymentForm" style="display:none;">
+        <label>Credit Card (Read only)</label>
+        <input type="text" value="Credit Card" readonly>
+
+        <label for="cardNo">Card Number</label>
+        <input type="text" id="cardNo" placeholder="Enter 16 digit card number">
+
+        <label for="cardHolderName">Card Holder Name</label>
+        <input type="text" id="cardHolderName" placeholder="Enter cardholder's name">
+
+        <label for="expiryDate">Expiry Date (MM/YY)</label>
+        <input type="text" id="expiryDate" placeholder="MM/YY">
+
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" placeholder="Enter CVV (3 digits)">
+        
+        <div class="button-container">
+            <button onclick="makePayment()">Make Payment</button>
+        </div>
+    </div>
+
+    <div id="successMessage" class="success-message">Payment Successful! Your Booking ID is #12345.</div>
+</div>
+
+<script>
+    function logout() {
+        alert("Logging out...");
+        // Simulate logging out and redirect to login page
+        window.location.href = 'login.html';
+    }
+
+    function proceedToPayment() {
+        document.getElementById('paymentForm').style.display = 'block';
+    }
+
+    function backToHome() {
+        alert("Redirecting to Booking Service Page...");
+        // Redirect to booking service page
+        window.location.href = 'booking-service.html';
+    }
+
+    function makePayment() {
+        // Get input values
+        const cardNo = document.getElementById('cardNo').value;
+        const cardHolderName = document.getElementById('cardHolderName').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+        const cvv = document.getElementById('cvv').value;
+
+        // Perform validations
+        if (!cardNo || cardNo.length !== 16 || isNaN(cardNo)) {
+            alert('Please enter a valid 16 digit card number.');
+            return;
+        }
+        if (!cardHolderName) {
+            alert('Please enter the cardholder\'s name.');
+            return;
+        }
+        if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate)) {
+            alert('Please enter a valid expiry date in MM/YY format.');
+            return;
+        }
+        if (!cvv || cvv.length !== 3 || isNaN(cvv)) {
+            alert('Please enter a valid 3 digit CVV.');
+            return;
+        }
+
+        // Simulate successful payment
+        document.getElementById('paymentForm').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+
+        // Redirect to invoice page after payment success
+        setTimeout(() => {
+            alert("Redirecting to Invoice Page...");
+            window.location.href = 'invoice.html';
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>

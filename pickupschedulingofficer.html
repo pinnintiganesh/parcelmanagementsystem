@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pickup Scheduling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .form-group input, .form-group button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Schedule Pickup</h1>
+        <div class="form-group">
+            <label for="bookingId">Booking ID:</label>
+            <input type="text" id="bookingId" placeholder="Enter Booking ID" maxlength="12">
+        </div>
+        <div class="form-group">
+            <label for="pickupDate">Pickup Date:</label>
+            <input type="date" id="pickupDate">
+        </div>
+        <div class="form-group">
+            <label for="pickupTime">Pickup Time:</label>
+            <input type="time" id="pickupTime">
+        </div>
+        <div class="form-group">
+            <button onclick="schedulePickup()">Save</button>
+        </div>
+        <div class="message success" id="successMessage">Pickup scheduled successfully!</div>
+        <div class="message error" id="errorMessage">Error scheduling pickup. Please check your input.</div>
+    </div>
+
+    <script>
+        function schedulePickup() {
+            var bookingId = document.getElementById('bookingId').value;
+            var pickupDate = document.getElementById('pickupDate').value;
+            var pickupTime = document.getElementById('pickupTime').value;
+            var successMessage = document.getElementById('successMessage');
+            var errorMessage = document.getElementById('errorMessage');
+
+            // Basic validation
+            if (bookingId.length === 12 && pickupDate && pickupTime) {
+                // Simulate saving the information
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+
+                // Normally, you would send this data to the server
+                console.log('Pickup Scheduled:', {
+                    bookingId: bookingId,
+                    date: pickupDate,
+                    time: pickupTime
+                });
+            } else {
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .tracking-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .tracking-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .tracking-header h1 {
+            margin: 0;
+            color: #333;
+        }
+        .tracking-form {
+            margin-bottom: 20px;
+        }
+        .tracking-form label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .tracking-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .tracking-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .tracking-form button:hover {
+            background-color: #0056b3;
+        }
+        .tracking-status {
+            text-align: center;
+            display: none;
+            margin-top: 20px;
+        }
+        .tracking-status p {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+        @media (max-width: 600px) {
+            .tracking-container {
+                padding: 15px;
+            }
+            .tracking-header h1 {
+                font-size: 24px;
+            }
+            .tracking-form input, .tracking-form button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tracking-container">
+        <div class="tracking-header">
+            <h1>Track Your Parcel</h1>
+        </div>
+        <div class="tracking-form">
+            <label for="booking-id">Enter Booking ID:</label>
+            <input type="text" id="booking-id" placeholder="Enter your 12-digit Booking ID" maxlength="12">
+            <button onclick="trackParcel()">Search</button>
+        </div>
+        <div class="tracking-status" id="status">
+            <p id="status-message">Please enter a Booking ID to track your parcel.</p>
+        </div>
+    </div>
+
+    <script>
+        function trackParcel() {
+            var bookingId = document.getElementById('booking-id').value;
+            var statusElement = document.getElementById('status');
+            var statusMessage = document.getElementById('status-message');
+
+            // Simulate a status check
+            if (bookingId.length === 12) {
+                // Normally, you would send the request to the server here.
+                statusMessage.textContent = 'Your parcel with Booking ID ' + bookingId + ' is currently in transit.';
+                statusElement.style.display = 'block';
+            } else {
+                statusMessage.textContent = 'Please enter a valid 12-digit Booking ID.';
+                statusElement.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

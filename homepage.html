@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Home Page</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            height: 100%;
+        }
+        nav {
+            background-color: #007bff;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .menu {
+            display: flex;
+            list-style-type: none;
+        }
+        nav .menu li {
+            margin-right: 20px;
+        }
+        nav .menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav .menu li a:hover {
+            text-decoration: underline;
+        }
+        .welcome {
+            color: white;
+            font-size: 16px;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav .menu li {
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav>
+        <div class="welcome" id="welcomeMessage">Welcome, Customer</div>
+        <ul class="menu">
+            <li><a href="#" onclick="goToHome()">Home</a></li>
+            <li><a href="#" onclick="goToBooking()">Booking Service</a></li>
+            <li><a href="#" onclick="goToTracking()">Tracking</a></li>
+            <li><a href="#" onclick="goToPreviousBooking()">Previous Booking</a></li>
+            <li><a href="#" onclick="goToSupport()">Contact Support</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>PARCEL MANAGEMENT SYSTEM</h1>
+       
+    </div>
+
+    <script>
+        // Simulate getting the logged-in username from the backend
+        const loggedInUser = localStorage.getItem('username') || 'Customer';
+
+        // Display welcome message with username
+        document.getElementById('welcomeMessage').textContent = `Welcome, ${loggedInUser}`;
+
+        // Navigation functions (These would redirect to actual pages in a real app)
+        function goToHome() {
+            window.location.href = 'homepage.html';
+        }
+
+        function goToBooking() {
+            window.location.href = 'bookingservice.html';
+        }
+
+        function goToTracking() {
+            window.location.href = 'customertrack.html';
+        }
+
+        function goToPreviousBooking() {
+            window.location.href = 'bookinghistory.html';
+        }
+
+        function goToSupport() {
+            window.location.href = 'customersupport.html';
+        }
+
+        function logout() {
+            // Clear user details and redirect to login page
+            
+           
+            window.location.href = 'index.html';  // Replace with actual login page
+        }
+    </script>
+</body>
+</html>
